@@ -83,7 +83,7 @@ Akademik geçmiş ve eğitim bilgileri.
 İletişim bilgileri, sosyal medya hesapları ve iletişim formu.
 
 <img width="1886" height="1026" alt="Ekran görüntüsü 2026-11-09 144253" src="https://github.com/user-attachments/assets/8ad1bb93-f7f3-406c-b481-2b191753bff3" />
-<img width="1880" height="1033" alt="Ekran görüntüsü 2026-11-09 144336" src="https://github.com/user-attachments/assets/4a131768-1bd1-45cb-9aef-953f417b7b6a" />
+
 
 
 ### 🔐 Admin Paneli
@@ -286,7 +286,7 @@ Uygulama, terminalde belirtilen localhost adresinde çalışacaktır.
 
 💻 Backend Developer
 
-- GitHub: [GitHub Profilim](https://github.com/dcanylmz)
+- GitHub: [GitHub Profilim](https://github.com/EMR3758)
 - E-posta: emirozccn@gmail.com
 
 ---
