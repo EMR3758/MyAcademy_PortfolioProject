@@ -1,0 +1,46 @@
+﻿@model About
+@{
+    ViewData["Title"] = "Hakkımda Bilgisi Ekle";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<main class="page-content-area">
+
+    <div class="content-header-row">
+        <div>
+            <h1 class="page-title">Hakkımda Bilgisi Ekle</h1>
+            <p class="page-subtitle">Yeni bir hakkımda bilgisi ekleyin.</p>
+        </div>
+    </div>
+
+    <div class="data-table-card p-4">
+        <form asp-area="Admin" asp-controller="About" asp-action="CreateAbout" method="post">
+            <div class="mb-3">
+                <label class="form-label">Başlık</label>
+                <input type="text" asp-for="Title" class="form-control" placeholder="Örnek: Merhaba, ben Emirhan" required>
+            </div> 
+            <div class="mb-3">
+                <label class="form-label">Alt Açıklama</label>
+                <textarea asp-for="SubDescription" class="form-control" rows="3" placeholder="Örnek: Yazılım Mühendisi" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Açıklama</label>
+                <textarea asp-for="Details" class="form-control" rows="6" placeholder="Örnek: 5 yıldır yazılım geliştiriyorum..." required></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Görsel URL</label>
+                <input type="text" name="ImageUrl" class="form-control"
+                       placeholder="https://example.com/gorsel.jpg">
+            </div>
+
+            <button type="submit" class="btn-pastel-primary">
+                <i class="bi bi-save"></i>
+                Kaydet
+            </button>
+
+            <a href="/Admin/About/AboutList" class="btn btn-secondary">
+                Vazgeç
+            </a>
+        </form>
+    </div>
+</main>

@@ -1,0 +1,147 @@
+﻿@model MyAcademy_PortfolioProject.Entities.SkillItem
+
+@{
+    ViewData["Title"] = "Teknoloji Ekle";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content-area">
+
+    <div class="content-header-row">
+        <div>
+            <h1 class="page-title">Teknoloji Ekle</h1>
+            <p class="page-subtitle">
+                Yetenek kategorisine yeni bir teknoloji ekleyin.
+            </p>
+        </div>
+    </div>
+
+    <div class="data-table-card"
+         style="max-width: 650px; padding: 30px; margin: 25px auto;">
+
+        <form method="post">
+
+            <input type="hidden" name="SkillId"
+                   value="@ViewBag.SkillId" />
+
+            <div class="mb-4">
+                <label class="form-label fw-semibold">
+                    Teknoloji Adı
+                </label>
+
+                <input type="text"
+                       name="SkillItemTitle"
+                       class="form-control"
+                       placeholder="Örn: C#, ASP.NET Core, JavaScript"
+                       style="height: 48px;"
+                       required />
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label fw-semibold">
+                    Yetkinlik Seviyesi
+                </label>
+
+                <div class="input-group mb-3">
+                    <input type="number"
+                           id="levelNumber"
+                           name="Level"
+                           class="form-control"
+                           min="0"
+                           max="100"
+                           value="50"
+                           style="height: 48px;"
+                           required />
+
+                    <span class="input-group-text">%</span>
+                </div>
+
+                <input type="range"
+                       id="levelRange"
+                       min="0"
+                       max="100"
+                       value="50"
+                       class="form-range" />
+
+                <div class="d-flex justify-content-between">
+                    <small class="text-muted">0%</small>
+                    <small class="text-muted">50%</small>
+                    <small class="text-muted">100%</small>
+                </div>
+
+                <div class="d-flex justify-content-between mt-3 mb-2">
+                    <small class="text-muted">
+                        Önizleme
+                    </small>
+
+                    <strong id="levelText">50%</strong>
+                </div>
+
+                <div class="progress" style="height: 9px;">
+                    <div id="levelProgress"
+                         class="progress-bar"
+                         role="progressbar"
+                         style="width: 50%;"
+                         aria-valuenow="50"
+                         aria-valuemin="0"
+                         aria-valuemax="100">
+                    </div>
+                </div>
+
+                <small class="text-muted mt-2 d-block">
+                    Seviyeyi sayı girerek veya kaydırma çubuğuyla belirleyebilirsiniz.
+                </small>
+
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+
+                <a href="/Admin/Skill/SkillList"
+                   class="btn btn-light border px-4">
+                    Vazgeç
+                </a>
+
+                <button type="submit"
+                        class="btn-pastel-primary px-4">
+                    <i class="bi bi-check-lg me-1"></i>
+                    Kaydet
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+    const levelNumber = document.getElementById("levelNumber");
+    const levelRange = document.getElementById("levelRange");
+    const levelText = document.getElementById("levelText");
+    const levelProgress = document.getElementById("levelProgress");
+
+    function updateLevel(value) {
+
+        value = Math.min(100, Math.max(0, Number(value) || 0));
+
+        levelNumber.value = value;
+        levelRange.value = value;
+
+        levelText.textContent = value + "%";
+
+        levelProgress.style.width = value + "%";
+        levelProgress.setAttribute("aria-valuenow", value);
+    }
+
+    levelNumber.addEventListener("input", function () {
+        updateLevel(this.value);
+    });
+
+    levelRange.addEventListener("input", function () {
+        updateLevel(this.value);
+    });
+
+    updateLevel(50);
+</script>

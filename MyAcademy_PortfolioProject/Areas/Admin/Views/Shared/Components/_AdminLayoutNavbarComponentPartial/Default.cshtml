@@ -1,0 +1,78 @@
+﻿<header class="admin-navbar">
+    <div class="navbar-left">
+
+        <!-- Sidebar Toggle -->
+        <button class="sidebar-toggle-btn"
+                id="sidebarToggle"
+                aria-label="Menüyü Aç/Kapat">
+            <i class="bi bi-list"></i>
+        </button>
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-custom">
+            <a href="#">
+                <i class="bi bi-house me-1"></i>
+                Ana Sayfa
+            </a>
+            <span class="separator">/</span>
+            <span class="active-crumb">#</span>
+        </div>
+    </div>
+
+    <div class="navbar-right">
+
+        <!-- Quick Search -->
+        <div class="nav-search-box">
+            <i class="bi bi-search"></i>
+            <input type="text"
+                   placeholder="Aranacak kelime ..."
+                   id="navQuickSearch"
+                   aria-label="Deneyim ara">
+        </div>
+
+        <!-- Quick Add -->
+        <button type="button"
+                class="btn-quick-add"
+                id="btnQuickAdd"
+                onclick="openAddModal()">
+            <i class="bi bi-plus-lg"></i>
+            <span>Hızlı Ekle</span>
+        </button>
+
+        <!-- Notifications -->
+        <a href="javascript:void(0)"
+           class="icon-action-btn"
+           title="Bildirimler"
+           aria-label="Bildirimler"
+           id="notificationBtn">
+            <i class="bi bi-bell"></i>
+            <span class="notification-dot"></span>
+        </a>
+
+        <!-- Messages -->
+        <a href="javascript:void(0)"
+           class="icon-action-btn"
+           title="Mesajlar"
+           aria-label="Mesajlar"
+           id="quickMessagesBtn">
+            <i class="bi bi-chat-left-text"></i>
+        </a>
+
+        <!-- Admin Profile -->
+        <div class="nav-profile-pill"
+             id="navProfile"
+             role="button"
+             tabindex="0"
+             aria-label="Admin profil menüsü"
+             aria-haspopup="true">
+            <div class="nav-avatar-mini">EÖ</div>
+            <span class="d-none d-sm-inline font-weight-600"
+                  style="font-size:0.825rem; font-weight:600;">
+                Emirhan Özcan
+            </span>
+            <i class="bi bi-chevron-down text-muted"
+               style="font-size:0.7rem;"></i>
+        </div>
+
+    </div>
+</header>

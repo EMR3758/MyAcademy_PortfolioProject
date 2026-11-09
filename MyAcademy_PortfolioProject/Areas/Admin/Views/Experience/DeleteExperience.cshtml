@@ -1,0 +1,21 @@
+﻿@model Experience
+@{
+    ViewData["Title"] = "Deneyimi Sil";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+<div class="container mt-4">
+    <h3>Deneyimi Sil</h3>
+    <p>Silmek istediğinizden emin olun.</p>
+
+    <div class="card p-3">
+        <h5>@Model.Title</h5>
+        <p><strong>Şirket:</strong> @Model.CompanyName</p>
+        <p><strong>Kategori:</strong> @Model.CategoryName</p>
+    </div>
+
+    <form asp-area="Admin" asp-controller="Experience" asp-action="DeleteExperience" method="post">
+        <input type="hidden" asp-for="ExperienceId" />
+        <button type="submit" class="btn btn-danger">Evet,Sil</button>
+        <a asp-area="Admin" asp-controller="Experience" asp-action="Index" class="btn btn-secondary">Vazgeç</a>
+    </form>
+</div>

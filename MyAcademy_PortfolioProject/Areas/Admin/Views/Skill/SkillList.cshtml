@@ -1,0 +1,132 @@
+﻿@model List<Skill>
+
+@{
+    ViewData["Title"] = "Yeteneklerim";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<main class="page-content-area">
+
+    <div class="content-header-row">
+        <div>
+            <h1 class="page-title">Yeteneklerim</h1>
+            <p class="page-subtitle">Yetenek kategorilerini buradan yönetebilirsiniz.</p>
+        </div>
+
+        <a href="/Admin/Skill/SkillCreate" class="btn-pastel-primary">
+            <i class="bi bi-plus-lg"></i>
+            Yeni Yetenek Ekle
+        </a>
+    </div>
+
+    <div class="data-table-card" style="border-radius: 10px; overflow: hidden;">
+        <div class="table-responsive">
+            <table class="custom-admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>İkon</th>
+                        <th>Başlık</th>
+                        <th>Açıklama</th>
+                        <th>Teknolojiler</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.SkillId</td>
+
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.IconUrl))
+                                {
+                                    <i class="@item.IconUrl" style="font-size:25px;"></i>
+                                }
+                            </td>
+
+                            <td>@item.Title</td>
+                            <td>@item.Description</td>
+                            <td style="min-width: 220px;">
+                                @if (item.SkillItems != null && item.SkillItems.Any())
+                                {
+                                    @foreach (var skillItem in item.SkillItems)
+                                    {
+                                        <div class="mb-2">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+
+                                                <span>@skillItem.SkillItemTitle</span>
+
+                                                <div class="d-flex align-items-center gap-2">
+
+                                                    <span>@skillItem.Level%</span>
+
+                                                    <a href="/Admin/SkillItem/SkillItemUpdate/@skillItem.SkillItemId"
+                                                       class="btn-action-icon btn-edit"
+                                                       title="Teknolojiyi Düzenle">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </a>
+
+                                                    <a href="/Admin/SkillItem/SkillItemDelete/@skillItem.SkillItemId"
+                                                       class="btn-action-icon btn-delete"
+                                                       title="Teknolojiyi Sil"
+                                                       onclick="return confirm('Bu teknolojiyi silmek istediğinize emin misiniz?');">
+                                                        <i class="bi bi-trash3"></i>
+                                                    </a>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar"
+                                                     role="progressbar"
+                                                     style="width: @skillItem.Level%;"
+                                                     aria-valuenow="@skillItem.Level"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Henüz teknoloji eklenmemiş</span>
+                                }
+                            </td>
+
+                            <td>
+                                <div class="row-actions-group">
+                                    <a href="/Admin/Skill/SkillUpdate/@item.SkillId"
+                                       class="btn-action-icon btn-edit" title="Düzenle">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+
+                                    <a href="/Admin/SkillItem/SkillItemCreate?id=@item.SkillId"
+                                       class="btn-action-icon"
+                                       title="Teknoloji Ekle">
+                                        <i class="bi bi-code-slash"></i>
+                                    </a>
+
+                                    <button type="button"
+                                            class="btn-action-icon btn-delete"
+                                            title="Sil"
+                                            onclick="openDeleteModal(@item.SkillId)">
+                                        <i class="bi bi-trash3"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-footer" style="border-radius: 0; padding: 16px 20px; overflow: visible;">
+            Toplam @Model.Count() yetenek kategorisi listeleniyor.
+        </div>
+    </div>
+
+</main>

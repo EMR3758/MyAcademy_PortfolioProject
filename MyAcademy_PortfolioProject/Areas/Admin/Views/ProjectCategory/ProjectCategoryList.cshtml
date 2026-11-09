@@ -1,0 +1,70 @@
+﻿@model List<ProjectCategory>
+
+@{
+    ViewData["Title"] = "Proje Kategorileri";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content-area">
+
+    <div class="content-header-row">
+        <div>
+            <h2>Proje Kategorileri</h2>
+            <p>Projelerinde kullanacağın kategorileri yönet.</p>
+        </div>
+
+        <a href="/Admin/ProjectCategory/CreateProjectCategory"
+           class="btn-pastel-primary">
+            <i class="fas fa-plus"></i> Yeni Kategori
+        </a>
+    </div>
+
+    <div class="data-table-card">
+        <table class="custom-admin-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Kategori Adı</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ProjectCategoryId</td>
+                            <td>@item.CategoryName</td>
+                            <td>
+                                <div class="row-actions-group">
+                                    <a href="/Admin/ProjectCategory/UpdateProjectCategory/@item.ProjectCategoryId"
+                                       class="btn-action-icon"
+                                       title="Düzenle">
+                                        ✏️
+                                    </a>
+
+                                    <form method="post"
+                                          action="/Admin/ProjectCategory/DeleteProjectCategory/@item.ProjectCategoryId"
+                                          onsubmit="return confirm('Bu kategoriyi silmek istediğine emin misin?');">
+                                        <button type="submit" class="btn-action-icon" title="Sil">
+                                            🗑️
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3">Henüz kategori eklenmemiş.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

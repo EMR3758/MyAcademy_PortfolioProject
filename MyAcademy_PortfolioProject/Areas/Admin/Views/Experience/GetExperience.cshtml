@@ -1,0 +1,26 @@
+﻿@model Experience
+@{
+    ViewData["Title"] = "Deneyim Detayı";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+<div class="container mt-4">
+    <h3>Deneyim Detayları</h3>
+    <div class="card p-4">
+        <h4>@Model.Title</h4>
+        <hr />
+        <p><strong>Şirket:</strong> @Model.CompanyName</p>
+        <p><strong>Kategori:</strong> @Model.CategoryName</p>
+        <p><strong>Başlangıç Tarihi:</strong> @Model.StartDate?.ToString("dd/MM/yyyy")</p>
+        <p><strong>Bitiş Tarihi:</strong> @(Model.EndDate.HasValue ? Model.EndDate.Value.ToString("dd/MM/yyyy") : "Devam Ediyor")</p>
+        <p><strong>Açıklama:</strong> @Model.Description</p>
+        <p>
+            <strong>Durum:</strong>
+            @(Model.IsActive ? "Aktif" : "Pasif")
+        </p>
+        <p><strong>Görüntüleme Sırası:</strong> @Model.DisplayOrder</p>
+    </div>
+    <div class="mt-3">
+        <a href="/Admin/Experience/ExperienceList" class="btn btn-secondary">Listeye Dön</a>
+        <a href="/Admin/Experience/UpdateExperience/@Model.ExperienceId" class="btn btn-warning">Düzenle</a>
+    </div>
+</div>

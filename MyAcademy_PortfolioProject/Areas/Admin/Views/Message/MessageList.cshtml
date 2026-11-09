@@ -1,0 +1,68 @@
+﻿@model List<MyAcademy_PortfolioProject.Entities.Message>
+
+@{
+    ViewData["Title"] = "Gelen Mesajlar";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<main class="page-content-area">
+
+    <div class="content-header-row">
+        <div>
+            <h1 class="page-title">Gelen Mesajlar</h1>
+            <p class="page-subtitle">İletişim formundan gönderilen mesajları buradan takip edebilirsiniz.</p>
+        </div>
+    </div>
+
+    <div class="data-table-card">
+
+        <div class="table-responsive">
+            <table class="custom-admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Gönderen</th>
+                        <th>Konu</th>
+                        <th>Tarih</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MessageId</td>
+
+                            <td>
+                                <strong>@item.SenderName</strong>
+                            </td>
+
+                            <td>@item.Subject</td>
+
+                            <td>
+                                @item.SendDate.ToString("dd.MM.yyyy")
+                            </td>
+
+                            <td>
+                                <div class="row-actions-group">
+                                    <a href="/Admin/Message/MessageDetails/@item.MessageId"
+                                       class="btn-action-icon btn-edit"
+                                       title="Mesajı Aç">
+                                        <i class="bi bi-envelope-open"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-footer">
+            Toplam @Model.Count mesaj listeleniyor.
+        </div>
+
+    </div>
+
+</main>

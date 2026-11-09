@@ -1,0 +1,167 @@
+﻿@using System.Text.Json
+@using MyAcademy_PortfolioProject.Entities
+@using System.Linq
+
+@{
+    var heroTitles = ViewBag.heroTitles as IEnumerable<HeroTitle>
+                     ?? Enumerable.Empty<HeroTitle>();
+
+    var socialMedias = ViewBag.socialMedias as IEnumerable<SocialMedia>
+                       ?? Enumerable.Empty<SocialMedia>();
+
+    var heroTitleList = heroTitles.Select(x => x.Title).ToList();
+}
+
+<!-- 4. Hero Section -->
+<section id="home">
+    <div class="container">
+        <div class="row align-items-center gy-5">
+
+            <!-- Left Column -->
+            <div class="col-lg-7 reveal-on-scroll is-revealed">
+
+                <div class="eyebrow-badge">
+                    <i class="bi bi-hand-wave-fill"></i> @ViewBag.greetings
+                </div>
+
+                <h1 class="hero-title">
+                    @ViewBag.title
+                </h1>
+
+                <!-- Dynamic Typewriter -->
+                <div class="typewriter-wrapper">
+                    <span id="typewriterText"></span>
+                    <span class="typing-cursor"></span>
+                </div>
+
+                <p class="hero-lead">
+                    @ViewBag.description
+                </p>
+
+                <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+
+                    <a href="#projects" class="btn-sage">
+                        <span>Projelerimi Keşfet</span>
+                        <i class="bi bi-arrow-down-right"></i>
+                    </a>
+
+                    <a href="#contact" class="btn-secondary-custom">
+                        <span>Benimle İletişime Geç</span>
+                        <i class="bi bi-chat-text"></i>
+                    </a>
+
+                </div>
+
+                <!-- Dynamic Social Links -->
+                @if (socialMedias.Any())
+                {
+                    <div class="d-flex align-items-center gap-2 pt-2 flex-wrap">
+
+                        <span class="text-muted small me-2 font-heading fw-semibold">
+                            Takip Et:
+                        </span>
+
+                        @foreach (var item in socialMedias)
+                        {
+                            <a href="@item.Url"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="social-pill"
+                               title="@item.Platform"
+                               aria-label="@item.Platform">
+
+                                <i class="@item.Icon"></i>
+
+                            </a>
+                        }
+
+                    </div>
+                }
+
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-lg-5 reveal-on-scroll is-revealed">
+
+                <div class="position-relative mx-auto" style="max-width: 440px;">
+
+                    <div class="hero-portrait-frame">
+
+                        <img src="@ViewBag.mainImageUrl"
+                             alt="Profil Görseli"
+                             class="hero-portrait-img">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="text-center mt-5 pt-4">
+
+            <a href="#about" class="scroll-indicator">
+
+                <div class="scroll-mouse">
+                    <div class="scroll-dot"></div>
+                </div>
+
+                <span>Aşağı Kaydır</span>
+
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Typewriter Script -->
+<script>
+    const heroTitles = @Html.Raw(JsonSerializer.Serialize(heroTitleList));
+
+    const typewriterElement = document.getElementById("typewriterText");
+
+    let titleIndex = 0;
+    let characterIndex = 0;
+    let deleting = false;
+
+    function typeWriter() {
+
+        if (!heroTitles || heroTitles.length === 0) {
+            return;
+        }
+
+        const currentTitle = heroTitles[titleIndex];
+
+        if (deleting) {
+            characterIndex--;
+        } else {
+            characterIndex++;
+        }
+
+        typewriterElement.textContent =
+            currentTitle.substring(0, characterIndex);
+
+        let speed = deleting ? 80 : 150;
+
+        if (!deleting && characterIndex === currentTitle.length) {
+
+            deleting = true;
+            speed = 2500;
+
+        } else if (deleting && characterIndex === 0) {
+
+            deleting = false;
+
+            titleIndex = (titleIndex + 1) % heroTitles.length;
+
+            speed = 400;
+        }
+
+        setTimeout(typeWriter, speed);
+    }
+
+    typeWriter();
+</script>

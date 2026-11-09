@@ -1,0 +1,81 @@
+﻿@model MyAcademy_PortfolioProject.Entities.SocialMedia
+
+@{
+    ViewData["Title"] = "Sosyal Medya Ekle";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid px-4 py-4">
+    <h2 class="fw-semibold mb-4">Sosyal Medya Hesabı Ekle</h2>
+
+    <div class="card border-0 shadow-sm p-4" style="border-radius: 20px;">
+        <form method="post">
+
+            <div class="mb-3">
+                <label class="form-label">Platform</label>
+                <select name="Platform" class="form-select" required>
+                    <option value="">Platform Seç</option>
+                    <optgroup label="Sosyal Medya">
+                        <option value="Instagram">Instagram</option>
+                        <option value="LinkedIn">LinkedIn</option>
+                        <option value="X">X (Twitter)</option>
+                        <option value="YouTube">YouTube</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="TikTok">TikTok</option>
+                        <option value="Threads">Threads</option>
+                        <option value="Pinterest">Pinterest</option>
+                        <option value="Reddit">Reddit</option>
+                    </optgroup>
+
+                    <optgroup label="Yazılım ve Geliştirici">
+                        <option value="GitHub">GitHub</option>
+                        <option value="GitLab">GitLab</option>
+                        <option value="Bitbucket">Bitbucket</option>
+                        <option value="Stack Overflow">Stack Overflow</option>
+                        <option value="CodePen">CodePen</option>
+                        <option value="CodeSandbox">CodeSandbox</option>
+                        <option value="LeetCode">LeetCode</option>
+                        <option value="HackerRank">HackerRank</option>
+                        <option value="Dev.to">Dev.to</option>
+                        <option value="Medium">Medium</option>
+                    </optgroup>
+
+                    <optgroup label="Tasarım ve Portfolyo">
+                        <option value="Behance">Behance</option>
+                        <option value="Dribbble">Dribbble</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Profil URL</label>
+                <input type="url" name="Url" class="form-control"
+                       placeholder="https://..." required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">İkon Sınıfı</label>
+                <input type="text" name="Icon" class="form-control"
+                       placeholder="Örn: bi bi-instagram" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Gösterim Sırası</label>
+                <input type="number" name="Order" class="form-control"
+                       min="1" value="1" required />
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Durum</label>
+                <select name="IsActive" class="form-select">
+                    <option value="Aktif">Aktif</option>
+                    <option value="Pasif">Pasif</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <a href="/Admin/SocialMedia/SocialMediaList"
+               class="btn btn-secondary">İptal</a>
+        </form>
+    </div>
+</div>

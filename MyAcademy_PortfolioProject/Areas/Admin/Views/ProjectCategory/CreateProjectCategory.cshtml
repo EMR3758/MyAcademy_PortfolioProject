@@ -1,0 +1,47 @@
+﻿@model MyAcademy_PortfolioProject.Entities.ProjectCategory
+
+@{
+    ViewData["Title"] = "Yeni Kategori Ekle";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content-area">
+
+    <div class="content-header-row">
+        <div>
+            <h2>Yeni Kategori Ekle</h2>
+            <p>Projelerinde kullanacağın yeni kategoriyi oluştur.</p>
+        </div>
+    </div>
+
+    <div class="data-table-card" style="padding: 25px;">
+
+        <form asp-area="Admin"
+              asp-controller="ProjectCategory"
+              asp-action="CreateProjectCategory"
+              method="post">
+
+            <div class="mb-3">
+                <label class="form-label">Kategori Adı</label>
+
+                <input asp-for="CategoryName"
+                       class="form-control"
+                       placeholder="Örn: Web Uygulamaları"
+                       required />
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn-pastel-primary">
+                    <i class="fas fa-save"></i> Kategoriyi Kaydet
+                </button>
+
+                <a href="/Admin/ProjectCategory/ProjectCategoryList"
+                   class="btn btn-secondary">
+                    İptal
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+</div>

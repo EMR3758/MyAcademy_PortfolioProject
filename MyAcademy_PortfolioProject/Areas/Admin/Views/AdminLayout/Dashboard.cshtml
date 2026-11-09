@@ -1,0 +1,410 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+    ViewData["Title"] = "Dashboard";
+}
+
+<style>
+    .dashboard {
+        padding: 24px;
+        background: #f7f7f5;
+        min-height: 100vh;
+        color: #26332f;
+    }
+
+    .dashboard-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin-bottom: 18px;
+    }
+
+    .stat-card, .dashboard-card {
+        background: white;
+        border: 1px solid #ecece8;
+        border-radius: 13px;
+        padding: 20px;
+    }
+
+    .stat-card {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .stat-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #eaf0ec;
+        color: #527566;
+        font-size: 20px;
+    }
+
+    .stat-number {
+        font-size: 25px;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .stat-label {
+        color: #89918c;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 0.9fr 1.15fr;
+        gap: 16px;
+        margin-bottom: 18px;
+    }
+
+    .dashboard-bottom {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 16px;
+    }
+
+    .card-title {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .quick-link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 13px;
+        border: 1px solid #eeeeea;
+        border-radius: 9px;
+        color: #53615b;
+        text-decoration: none;
+        font-size: 13px;
+        margin-bottom: 9px;
+        transition: .2s;
+    }
+
+        .quick-link:hover {
+            background: #f3f7f4;
+            color: #426858;
+        }
+
+    .message-item, .project-item {
+        padding: 13px 0;
+        border-bottom: 1px solid #eeeeea;
+        font-size: 13px;
+    }
+
+        .message-item:last-child, .project-item:last-child {
+            border-bottom: none;
+        }
+
+    .message-date {
+        color: #929b95;
+        font-size: 11px;
+        margin-top: 5px;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 20px;
+        font-size: 10px;
+        background: #eaf1ed;
+        color: #527566;
+    }
+
+    .status-unread {
+        background: #f9e9e7;
+        color: #b7655d;
+    }
+
+    .chart-area {
+        height: 155px;
+        display: flex;
+        justify-content: space-around;
+        align-items: end;
+        gap: 12px;
+        padding-top: 15px;
+    }
+
+    .chart-day {
+        flex: 1;
+        text-align: center;
+        font-size: 11px;
+        color: #89918c;
+    }
+
+    .chart-bar {
+        width: 25px;
+        max-width: 100%;
+        min-height: 3px;
+        background: #58796b;
+        border-radius: 5px 5px 0 0;
+        margin: 8px auto;
+    }
+
+    .chart-count {
+        color: #35463e;
+        font-size: 11px;
+    }
+
+    .donut {
+        width: 125px;
+        height: 125px;
+        border-radius: 50%;
+        margin: 10px auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: conic-gradient(#426858 0% var(--read-rate), #e7ebe7 var(--read-rate) 100%);
+    }
+
+    .donut-inner {
+        width: 88px;
+        height: 88px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 21px;
+        font-weight: 700;
+    }
+
+    .legend {
+        text-align: center;
+        font-size: 11px;
+        color: #89918c;
+        margin-top: 15px;
+    }
+
+    .category-row {
+        margin-bottom: 16px;
+        font-size: 12px;
+    }
+
+    .category-progress {
+        height: 6px;
+        background: #edf0ed;
+        border-radius: 10px;
+        margin-top: 7px;
+        overflow: hidden;
+    }
+
+        .category-progress div {
+            height: 100%;
+            background: #58796b;
+            border-radius: 10px;
+        }
+
+    @@media (max-width: 1000px) {
+        .dashboard-stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .dashboard-grid, .dashboard-bottom {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @@media (max-width: 550px) {
+        .dashboard {
+            padding: 12px;
+        }
+
+        .dashboard-stats {
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .stat-card {
+            padding: 12px;
+        }
+    }
+</style>
+
+<div class="dashboard">
+
+    <div class="dashboard-stats">
+
+        <div class="stat-card">
+            <div class="stat-icon">▱</div>
+            <div>
+                <div class="stat-number">@ViewBag.TotalProjects</div>
+                <div class="stat-label">Toplam Proje</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">✓</div>
+            <div>
+                <div class="stat-number">@ViewBag.ActiveProjects</div>
+                <div class="stat-label">Aktif Proje</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">✧</div>
+            <div>
+                <div class="stat-number">@ViewBag.TotalSkills</div>
+                <div class="stat-label">Yetenek</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">▣</div>
+            <div>
+                <div class="stat-number">@ViewBag.TotalExperiences</div>
+                <div class="stat-label">Deneyim</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">✎</div>
+            <div>
+                <div class="stat-number">0</div>
+                <div class="stat-label">Eğitim</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">✉</div>
+            <div>
+                <div class="stat-number">@ViewBag.TotalMessages</div>
+                <div class="stat-label">Toplam Mesaj</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">✉</div>
+            <div>
+                <div class="stat-number">@ViewBag.UnreadMessages</div>
+                <div class="stat-label">Okunmamış</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="dashboard-card">
+            <div class="card-title">Son 7 Gün</div>
+
+            <div class="chart-area">
+                @for (int i = 6; i >= 0; i--)
+                {
+                    var day = DateTime.Today.AddDays(-i);
+                    var count = ((IEnumerable<dynamic>)ViewBag.RecentMessages)
+                        .Count(x => ((DateTime)x.SendDate).Date == day.Date);
+
+                    <div class="chart-day">
+                        <div class="chart-count">@count</div>
+                        <div class="chart-bar" style="height:@(Math.Max(count * 25, 3))px"></div>
+                        @day.ToString("ddd")
+                    </div>
+                }
+            </div>
+            <div class="stat-label">Günlük gelen mesajlar</div>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-title">Okunma Oranı</div>
+
+            @{
+                int total = (int)ViewBag.TotalMessages;
+                int unread = (int)ViewBag.UnreadMessages;
+                int readRate = total > 0 ? (int)Math.Round((double)(total - unread) / total * 100) : 0;
+            }
+
+            <div class="donut" style="--read-rate:@(readRate)%">
+                <div class="donut-inner">%@readRate</div>
+            </div>
+
+            <div class="legend">
+                ● Okundu (@(total - unread)) &nbsp; ● Okunmadı (@unread)
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-title">Hızlı Erişim</div>
+
+            <a asp-area="Admin" asp-controller="Project" asp-action="CreateProject" class="quick-link">
+                <span>＋ Yeni Proje Ekle</span><span>›</span>
+            </a>
+
+            <a asp-area="Admin" asp-controller="Message" asp-action="MessageList" class="quick-link">
+                <span>✉ Mesajları Gör</span><span>›</span>
+            </a>
+
+            <a asp-area="Admin" asp-controller="ProjectCategory" asp-action="ProjectCategoryList" class="quick-link">
+                <span>◇ Kategorileri Yönet</span><span>›</span>
+            </a>
+
+            <a asp-area="" asp-controller="Default" asp-action="Index" class="quick-link">
+                <span>↗ Siteyi Önizle</span><span>›</span>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="dashboard-bottom">
+
+        <div class="dashboard-card">
+            <div class="card-title">Son Mesajlar</div>
+
+            @foreach (var message in ViewBag.RecentMessages)
+            {
+                <div class="message-item">
+                    <div style="display:flex; justify-content:space-between; gap:10px;">
+                        <strong>@message.SenderName</strong>
+
+                        @if (message.IsRead)
+                        {
+                            <span class="status-badge">Okundu</span>
+                        }
+                        else
+                        {
+                            <span class="status-badge status-unread">Yeni</span>
+                        }
+                    </div>
+
+                    <div>@message.Subject</div>
+                    <div class="message-date">
+                        @message.SendDate.ToString("dd.MM.yyyy HH:mm")
+                    </div>
+                </div>
+            }
+
+            @if (((IEnumerable<dynamic>)ViewBag.RecentMessages).Count() == 0)
+            {
+                <p class="stat-label">Henüz mesaj bulunmuyor.</p>
+            }
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-title">Son Eklenen Projeler</div>
+
+            @foreach (var project in ViewBag.RecentProjects)
+            {
+                <div class="project-item">
+                    <strong>@project.Title</strong>
+                    <div class="message-date">
+                        @project.CreatedDate.ToString("dd.MM.yyyy")
+                    </div>
+                </div>
+            }
+
+            @if (((IEnumerable<dynamic>)ViewBag.RecentProjects).Count() == 0)
+            {
+                <p class="stat-label">Henüz proje bulunmuyor.</p>
+            }
+        </div>
+
+    </div>
+
+</div>

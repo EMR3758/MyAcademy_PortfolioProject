@@ -1,0 +1,58 @@
+﻿@model MyAcademy_PortfolioProject.Entities.SocialMedia
+
+@{
+    ViewData["Title"] = "Sosyal Medya Güncelle";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid px-4 py-4">
+    <h2 class="fw-semibold mb-4">Sosyal Medya Hesabını Güncelle</h2>
+
+    <div class="card border-0 shadow-sm p-4" style="border-radius: 20px;">
+        <form method="post">
+
+            <input type="hidden" name="SocialMediaId"
+                   value="@Model.SocialMediaId" />
+
+            <div class="mb-3">
+                <label class="form-label">Platform</label>
+                <select name="Platform" class="form-select" required>
+                    <option value="Instagram" selected="@(Model.Platform == "Instagram")">Instagram</option>
+                    <option value="LinkedIn" selected="@(Model.Platform == "LinkedIn")">LinkedIn</option>
+                    <option value="GitHub" selected="@(Model.Platform == "GitHub")">GitHub</option>
+                    <option value="X" selected="@(Model.Platform == "X")">X</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Profil URL</label>
+                <input type="url" name="Url" class="form-control"
+                       value="@Model.Url" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">İkon Sınıfı</label>
+                <input type="text" name="Icon" class="form-control"
+                       value="@Model.Icon" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Gösterim Sırası</label>
+                <input type="number" name="Order" class="form-control"
+                       value="@Model.Order" min="1" required />
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Durum</label>
+                <select name="IsActive" class="form-select">
+                    <option value="Aktif" selected="@(Model.IsActive == "Aktif")">Aktif</option>
+                    <option value="Pasif" selected="@(Model.IsActive == "Pasif")">Pasif</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Güncelle</button>
+            <a href="/Admin/SocialMedia/SocialMediaList"
+               class="btn btn-secondary">İptal</a>
+        </form>
+    </div>
+</div>

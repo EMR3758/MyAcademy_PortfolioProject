@@ -1,0 +1,165 @@
+﻿
+<aside class="admin-sidebar" id="adminSidebar">
+
+    <!-- Brand Header -->
+    <div class="sidebar-header">
+        <div class="brand-mark">
+            <i class="bi bi-briefcase-fill"></i>
+        </div>
+        <div class="brand-text">
+            <h1>Emirhan Özcan</h1>
+            <span>Yönetim Paneli</span>
+        </div>
+    </div>
+
+    <!-- Menu Links -->
+    <div class="sidebar-menu-wrapper">
+
+        <div class="menu-section-label">Genel Bakış</div>
+        <ul class="sidebar-nav">
+            <li>
+                <a asp-area="Admin"
+                   asp-controller="AdminLayout"
+                   asp-action="Index"
+                   class="sidebar-link">
+                    <i class="bi bi-grid-1x2"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="menu-section-label mt-4">İçerik Yönetimi</div>
+        <ul class="sidebar-nav">
+
+            <li>
+                <a asp-area="Admin"
+                   asp-controller="About"
+                   asp-action="AboutList"
+                   class="sidebar-link">
+                    <i class="bi bi-person"></i>
+                    <span>Hakkımda</span>
+                </a>
+            </li>
+
+            <li>
+                <a asp-area="Admin"
+                   asp-controller="Skill"
+                   asp-action="SkillList"
+                   class="sidebar-link">
+                    <i class="bi bi-stars"></i>
+                    <span>Yeteneklerim</span>
+                </a>
+            </li>
+
+            <li>
+                <a asp-area="Admin"
+                   asp-controller="Experience"
+                   asp-action="ExperienceList"
+                   class="sidebar-link">
+                    <i class="bi bi-journal-bookmark-fill"></i>
+                    <span>Deneyimlerim</span>
+                </a>
+            </li>
+
+            <li>
+                <a asp-area="Admin"
+                   asp-controller="Project"
+                   asp-action="ProjectList"
+                   class="sidebar-link">
+                    <i class="bi bi-code-slash"></i>
+                    <span>Projelerim</span>
+                </a>
+            </li>
+
+            <li>
+                <a asp-area="Admin"
+                   asp-controller="ProjectCategory"
+                   asp-action="ProjectCategoryList"
+                   class="sidebar-link">
+                    <i class="bi bi-tags"></i>
+                    <span>Proje Kategorileri</span>
+                </a>
+            </li>
+
+            <li>
+                <a asp-area="Admin"
+                   asp-controller="Education"
+                   asp-action="EducationList"
+                   class="sidebar-link">
+                    <i class="bi bi-mortarboard"></i>
+                    <span>Eğitim Bilgilerim</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="Admin"
+                   asp-controller="Hero"
+                   asp-action="Hero"
+                   class="sidebar-link">
+                    <i class="bi bi-house-heart"></i>
+                    <span>Hero</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="Admin"
+                   asp-controller="HeroTitle"
+                   asp-action="HeroTitleList"
+                   class="sidebar-link">
+                    <i class="bi bi-type"></i>
+                    <span>Kayan Yazılar</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="Admin"
+                   asp-controller="SocialMedia"
+                   asp-action="SocialMediaList"
+                   class="sidebar-link">
+                    <i class="bi bi-share-fill"></i>
+                    <span>Sosyal Medya</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="menu-section-label mt-4">İletişim Yönetimi</div>
+        <ul class="sidebar-nav">
+
+            <li>
+                <a asp-area="Admin"
+                   asp-controller="Contact"
+                   asp-action="ContactList"
+                   class="sidebar-link">
+                    <i class="bi bi-person-lines-fill"></i>
+                    <span>İletişim Bilgileri</span>
+                </a>
+            </li>
+
+            <li>
+                <a asp-area="Admin"
+                   asp-controller="Message"
+                   asp-action="MessageList"
+                   class="sidebar-link">
+                    <i class="bi bi-inbox"></i>
+                    <span>Gelen Kutusu</span>
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Admin User / Logout Footer -->
+    <div class="sidebar-footer">
+        <div class="admin-user-card">
+            <div class="user-avatar-circle">EÖ</div>
+            <div class="user-info">
+                <div class="user-name">Emirhan Özcan</div>
+                <div class="user-role">İçerik Yöneticisi</div>
+            </div>
+            <button class="btn-logout"
+                    title="Çıkış Yap"
+                    id="btnLogout">
+                <i class="bi bi-box-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+</aside>

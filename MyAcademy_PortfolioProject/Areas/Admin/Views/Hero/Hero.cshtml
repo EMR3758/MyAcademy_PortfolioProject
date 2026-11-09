@@ -1,0 +1,94 @@
+﻿@model MyAcademy_PortfolioProject.Entities.HeroSection
+
+@{
+    ViewData["Title"] = "Ana Sayfa Hero Alanı";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid px-4 py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h1 class="fw-semibold mb-2">Ana Sayfa Hero Alanı</h1>
+            <p class="text-muted mb-0">
+                Ana sayfanın karşılama alanını buradan yönetebilirsin.
+            </p>
+        </div>
+
+        <a href="/Admin/Hero/UpdateHero"
+           class="btn text-white px-4 py-3"
+           style="background-color: #98b7a2; border-radius: 12px;">
+            <i class="bi bi-pencil-square me-2"></i>
+            Hero Alanını Düzenle
+        </a>
+    </div>
+
+    <div class="card border-0 shadow-sm"
+         style="border-radius: 20px; overflow: hidden;">
+
+        <div class="card-header bg-transparent py-3 px-4">
+            <h5 class="mb-0 fw-semibold">Hero Bilgileri</h5>
+        </div>
+
+        <div class="card-body p-4">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-8">
+
+                    <div class="mb-4">
+                        <label class="text-muted small mb-2">
+                            KARŞILAMA YAZISI
+                        </label>
+                        <h5>@Model.Greeting</h5>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-muted small mb-2">
+                            ANA BAŞLIK
+                        </label>
+                        <h4>@Model.Title</h4>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-muted small mb-2">
+                            AÇIKLAMA
+                        </label>
+                        <p class="mb-0">@Model.Description</p>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4 text-center">
+                    <label class="text-muted small mb-3 d-block">
+                        PROFİL GÖRSELİ
+                    </label>
+
+                    @if (!string.IsNullOrEmpty(Model.MainImageUrl))
+                    {
+                        <img src="@Model.MainImageUrl"
+                             alt="Profil Görseli"
+                             style="width: 180px; height: 180px;
+                        object-fit: cover; border-radius: 16px;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">Görsel bulunamadı.</span>
+                    }
+                </div>
+
+            </div>
+
+            <hr class="my-4" />
+
+            <div class="d-flex justify-content-end">
+                <a href="/Admin/Hero/UpdateHero"
+                   class="btn btn-outline-secondary px-4">
+                    <i class="bi bi-pencil me-2"></i>
+                    Düzenle
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

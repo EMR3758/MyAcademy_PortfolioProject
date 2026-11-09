@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+@await Component.InvokeAsync("_DefaultHeaderComponentPartial")
+<body>
+
+    @await Component.InvokeAsync("_DefaultNavbarComponentPartial")
+
+  <main>
+        @await Component.InvokeAsync("_DefaultHeroSectionComponentPartial")
+        @await Component.InvokeAsync("_DefaultAboutComponentPartial")
+        @await Component.InvokeAsync("_DefaultSkillsComponentPartial")
+        @await Component.InvokeAsync("_DefaultExperienceComponentPartial")
+        @await Component.InvokeAsync("_DefaultProjectComponentPartial")
+        @await Component.InvokeAsync("_DefaultEducationComponentPartial")
+
+    <!-- 10. Personal Philosophy Section -->
+    <section class="philosophy-section text-center">
+      <div class="container">
+        <div class="mx-auto reveal-on-scroll" style="max-width: 820px;">
+          <div class="mb-3 text-secondary" style="font-size: 2.5rem; line-height: 1;">
+            <i class="bi bi-code-slash text-light opacity-50"></i>
+          </div>
+          <p class="philosophy-quote mb-4">
+             "Fikirler düşünceyle başlar, değer ise onları çalışan sistemlere dönüştürmekle oluşur."
+          </p>
+          <div class="d-inline-flex align-items-center gap-2 text-white-50 small font-heading">
+            <span class="w-12 h-px bg-white-50"></span>
+            <span>Emirhan Özcan — Yazılım Felsefesi</span>
+          </div>
+        </div>
+      </div>
+    </section>
+        @await Component.InvokeAsync("_DefaultContactComponentPartial")
+
+  </main>
+
+  <!-- 12. Footer -->
+  @await Component.InvokeAsync("_DefaultFooterComponentPartial")
+  
+
+    @await Component.InvokeAsync("_DefaultScriptComponentPartial")
+
+
+</body>
+</html>

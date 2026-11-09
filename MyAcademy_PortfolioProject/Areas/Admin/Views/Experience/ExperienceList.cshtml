@@ -1,0 +1,179 @@
+﻿@model List<Experience>
+@{
+    ViewData["Title"] = "ExperienceList";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+<!-- CONTENT BODY -->
+    <main class="page-content-area">
+
+      <!-- Page Header Row -->
+      <div class="content-header-row">
+        <div>
+          <h1 class="page-title">Deneyimlerim Yönetimi</h1>
+          <p class="page-subtitle">Portfolyo sitenizde yer alacak deneyim içeriklerini buradan yönetebilirsiniz.</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-pastel-secondary" id="btnExport">
+            <i class="bi bi-download"></i>
+            <span>Dışa Aktar</span>
+          </button>
+            <a href="/Admin/Experience/CreateExperience" class="btn-pastel-primary" style="padding: 7px 14px; font-size: 0.8rem;"><i class="bi bi-plus-lg"></i> <span>Yeni Deneyim Ekle</span></a>
+            
+        </div>
+      </div>
+
+
+      <!-- Main Experience Table Container -->
+      <div class="data-table-card">
+        
+        <!-- Filter / Action Toolbar -->
+        <div class="table-filter-bar">
+          <div class="filters-left-group">
+            <div class="filter-search-box">
+              <i class="bi bi-search"></i>
+              <input type="text" id="tableSearchInput" placeholder="Deneyim başlığına göre ara...">
+            </div>
+
+            <select class="filter-select" id="statusFilterSelect">
+              <option value="all">Durum Seçiniz (Tümü)</option>
+              <option value="Aktif">Aktif</option>
+              <option value="Pasif">Pasif</option>
+            </select>
+
+            <select class="filter-select" id="sortSelect">
+              <option value="order-asc">Sıralama: Önce 1 (Artan)</option>
+              <option value="order-desc">Sıralama: Önce 4 (Azalan)</option>
+              <option value="title-asc">Başlık (A-Z)</option>
+            </select>
+          </div>
+
+          <div class="filters-right-group">
+            <button class="btn-table-util" id="btnRefreshTable" title="Tabloyu Yenile">
+              <i class="bi bi-arrow-clockwise"></i>
+              <span class="d-none d-md-inline">Yenile</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Experience Table -->
+        <div class="table-responsive-wrapper">
+          <table class="custom-admin-table" id="experienceTable">
+            <thead>
+              <tr>
+                <th style="width: 60px;">ID</th>
+                <th>Deneyim Başlığı</th>
+                <th>Kurum / Şirket</th>
+                <th>Çalışma Türü</th>
+                <th>Tarih Aralığı</th>
+                <th>Durum</th>
+                <th style="text-align: center;">Sıralama</th>
+                <th style="text-align: right; width: 140px;">İşlemler</th>
+              </tr>
+            </thead>
+                <tbody id="experienceTableBody">
+
+                    @foreach (var item in Model)
+                    {
+                        <tr data-id="@item.ExperienceId"
+                            data-status="@(item.IsActive ? "Aktif" : "Pasif")"
+                            data-order="@item.DisplayOrder">
+
+                            <td class="col-id">#@item.ExperienceId</td>
+
+                            <td>
+                                <div class="experience-title-cell">
+                                    <div class="exp-icon-bullet">
+                                        <i class="bi bi-briefcase"></i>
+                                    </div>
+                                    <div>
+                                        <span class="exp-title-text">@item.Title</span>
+                                        <small class="text-muted d-block" style="font-size:0.75rem;">
+                                            @item.Description
+                                        </small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="company-cell">
+                                    <i class="bi bi-building company-badge-icon"></i>
+                                    <span>@item.CompanyName</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span class="work-type-badge">@item.CategoryName</span>
+                            </td>
+
+                            <td>
+                                <span class="date-badge">
+                                    <i class="bi bi-calendar2-range"></i>
+
+                                    @(item.StartDate?.ToString("MM.yyyy") ?? "Belirtilmedi")
+                                    -
+                                    @(item.IsCurrent
+                                        ? "Devam Ediyor"
+                                        : item.EndDate?.ToString("MM.yyyy") ?? "Belirtilmedi")
+                                </span>
+                            </td>
+
+                            <td>
+                                @if (item.IsActive)
+                                {
+                                    <span class="status-pill status-active">Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="status-pill status-passive">Pasif</span>
+                                }
+                            </td>
+
+                            <td style="text-align: center;">
+                                <span class="order-badge">@item.DisplayOrder</span>
+                            </td>
+
+                            <td style="text-align: right;">
+                                <div class="row-actions-group justify-content-end">
+
+                                    <a asp-area="Admin"
+                                       asp-controller="Experience"
+                                       asp-action="GetExperience"
+                                       asp-route-id="@item.ExperienceId"
+                                       class="btn-action-icon btn-view"
+                                       title="Görüntüle">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+
+                                    <a asp-action="UpdateExperience"
+                                       asp-route-id="@item.ExperienceId"
+                                       class="btn-action-icon btn-edit"
+                                       title="Güncelle">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+
+                                    <a asp-action="DeleteExperience"
+                                       asp-route-id="@item.ExperienceId"
+                                       class="btn-action-icon btn-delete"
+                                       title="Sil">
+                                        <i class="bi bi-trash3"></i>
+                                    </a>
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+          </table>
+        </div>
+
+        <!-- Table Footer: Pagination & Counter -->
+        <div class="table-footer-area">
+          <div class="pagination-counter">
+                Toplam <strong>@Model.Count</strong> deneyim kaydı görüntüleniyor.
+          </div>
+        </div>
+      </div>
+
+
+    </main>

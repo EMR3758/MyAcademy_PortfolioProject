@@ -1,0 +1,48 @@
+﻿@model MyAcademy_PortfolioProject.Entities.HeroTitle
+
+@{
+    ViewData["Title"] = "Kayan Yazıyı Güncelle";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid px-4 py-4">
+    <h2 class="fw-semibold mb-4">Kayan Yazıyı Güncelle</h2>
+
+    <div class="card border-0 shadow-sm p-4" style="border-radius: 20px;">
+        <form method="post">
+
+            <input type="hidden" name="HeroTitleId" value="@Model.HeroTitleId" />
+
+            <div class="mb-3">
+                <label class="form-label">Gösterilecek Yazı</label>
+                <input type="text" name="Title" class="form-control"
+                       value="@Model.Title" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Gösterim Sırası</label>
+                <input type="number" name="Order" class="form-control"
+                       value="@Model.Order" min="1" required />
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Durum</label>
+                <select name="IsActive" class="form-select">
+                    <option value="Aktif" selected="@(Model.IsActive == "Aktif")">Aktif</option>
+                    <option value="Pasif" selected="@(Model.IsActive == "Pasif")">Pasif</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn text-white px-4 py-2"
+                    style="background-color: #98b7a2;">
+                Güncelle
+            </button>
+
+            <a href="/Admin/HeroTitle/HeroTitleList"
+               class="btn btn-secondary px-4 py-2">
+                İptal
+            </a>
+
+        </form>
+    </div>
+</div>

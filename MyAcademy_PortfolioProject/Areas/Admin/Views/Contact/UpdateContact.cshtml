@@ -1,0 +1,68 @@
+﻿@model Contact
+
+@{
+    ViewData["Title"] = "İletişim Bilgilerini Güncelle";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<main class="page-content-area">
+
+    <div class="content-header-row">
+        <div>
+            <h1 class="page-title">İletişim Bilgilerini Güncelle</h1>
+            <p class="page-subtitle">Mevcut iletişim bilgilerini düzenleyebilirsiniz.</p>
+        </div>
+    </div>
+
+    <div class="data-table-card" style="padding:25px;">
+
+        <form asp-area="Admin"
+              asp-controller="Contact"
+              asp-action="UpdateContact"
+              method="post">
+
+            <input type="hidden" asp-for="ContactId" />
+
+            <div class="mb-3">
+                <label class="form-label">Başlık</label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Açıklama</label>
+                <textarea asp-for="Description"
+                          class="form-control"
+                          rows="4"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">E-posta</label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Konum</label>
+                <input asp-for="Location" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Telefon</label>
+                <input asp-for="PhoneNumber" class="form-control" />
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn-pastel-primary">
+                    Güncelle
+                </button>
+
+                <a href="/Admin/Contact/ContactList"
+                   class="btn btn-secondary">
+                    Vazgeç
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
